@@ -3,7 +3,7 @@ import requests
 import json
 
 root = Tk()
-root.title('VIN Decoder v1.0')
+root.title('VIN Decoder v1.1')
 
 root.geometry("390x200")
 
@@ -35,7 +35,7 @@ def myClick(): # perform vin search and output results
         Displacement = question["DisplacementL"]
         Cylinders = question["EngineCylinders"]
 
-    myLabel = Label(root, text=f'Year: {Yr}')
+    myLabel = Label(root, text=f'Year: {Yr}') 
     myLabel.grid(row=2, column=1)
 
     myLabel1 = Label(root, text=f'Make: {Make}')
@@ -60,4 +60,3 @@ clearbutton = Button(root, text='Clear', padx=30, bg="light gray", command=clear
 clearbutton.grid(row=2, padx=20, column=2)
 
 root.mainloop()
-
