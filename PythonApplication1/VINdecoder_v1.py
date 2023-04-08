@@ -1,27 +1,36 @@
-from tkinter import *
+import customtkinter as ctk
 import requests
-import json
 
-root = Tk()
-root.title('VIN Decoder v1.1')
+class App(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.geometry("345x275")
+        self.title("VIN Search 2.0")
+        
+root = App()
+#root.iconbitmap("car2.ico")
 
-root.geometry("390x200")
+e = ctk.CTkEntry(root, 
+                 width=200, 
+                 fg_color="black",
+                 text_color="white",
+                 font=ctk.CTkFont(family="arial", size=17)
+                 )
 
-e = Entry(root, width=35, bg="light gray")
-e.grid(row=1, column=1, padx=20, pady=5)
-e.insert(0,"1D4GP25E36B749644")
+e.grid(row=1, column=0, columnspan=2, padx=20, pady=5)
+e.insert(0,"zff79ala3g0217410")
 
 def clear(): # clear results from previous vin search
-    myLabel = Label(root, text='                                                                 ')
-    myLabel.grid(row=2, column=1)
-    myLabel1 = Label(root, text='                                                                       ')
-    myLabel1.grid(row=3, column=1)
-    myLabel2 = Label(root, text='                                                                       ')
-    myLabel2.grid(row=4, column=1)
-    myLabel3 = Label(root, text='                                                                       ')
-    myLabel3.grid(row=5, column=1)        
-    myLabel4 = Label(root, text='                                                                       ')
-    myLabel4.grid(row=6, column=1) 
+    myLabel = ctk.CTkLabel(root, text='                                                                                  ')
+    myLabel.grid(row=3, column=0, columnspan=2)
+    myLabel1 = ctk.CTkLabel(root, text='                                                                                 ')
+    myLabel1.grid(row=4, column=0, columnspan=2)
+    myLabel2 = ctk.CTkLabel(root, text='                                                                                 ')
+    myLabel2.grid(row=5, column=0, columnspan=2)
+    myLabel3 = ctk.CTkLabel(root, text='                                                                                 ')
+    myLabel3.grid(row=6, column=0, columnspan=2)        
+    myLabel4 = ctk.CTkLabel(root, text='                                                                                 ')
+    myLabel4.grid(row=7, column=0, columnspan=2) 
 
 def myClick(): # perform vin search and output results
     vin = e.get()
@@ -35,28 +44,52 @@ def myClick(): # perform vin search and output results
         Displacement = question["DisplacementL"]
         Cylinders = question["EngineCylinders"]
 
-    myLabel = Label(root, text=f'Year: {Yr}') 
-    myLabel.grid(row=2, column=1)
+    myLabel = ctk.CTkLabel(root, 
+                           text=f'Year: {Yr}',
+                           font=ctk.CTkFont(family="arial", size=17)
+                           )
+    myLabel.grid(row=3, column=0, columnspan=2)
 
-    myLabel1 = Label(root, text=f'Make: {Make}')
-    myLabel1.grid(row=3, column=1)
+    myLabel1 = ctk.CTkLabel(root, 
+                            text=f'Make: {Make}',
+                            font=ctk.CTkFont(family="arial", size=17)
+                           )
+    myLabel1.grid(row=4, column=0, columnspan=2)
 
-    myLabel2 = Label(root, text=f'Model: {Model}')
-    myLabel2.grid(row=4, column=1)
+    myLabel2 = ctk.CTkLabel(root, 
+                            text=f'Model: {Model}',
+                            font=ctk.CTkFont(family="arial", size=17)
+                           )
+    myLabel2.grid(row=5, column=0, columnspan=2)
 
-    myLabel3 = Label(root, text=f'Displacement: {Displacement}')
-    myLabel3.grid(row=5, column=1)
+    myLabel3 = ctk.CTkLabel(root, 
+                            text=f'Displacement: {Displacement}',
+                            font=ctk.CTkFont(family="arial", size=17)
+                           )
+    myLabel3.grid(row=6, column=0, columnspan=2)
 
-    myLabel4 = Label(root, text=f'# Cyl: {Cylinders}')
-    myLabel4.grid(row=6, column=1)
+    myLabel4 = ctk.CTkLabel(root, 
+                            text=f'# Cyl: {Cylinders}',
+                            font=ctk.CTkFont(family="arial", size=17)
+                           )
+    myLabel4.grid(row=7, column=0, columnspan=2)
     
-myLabel1 = Label(root, text="Enter a VIN to test the decoder")
-myLabel1.grid(row=0, column=1, padx=25, pady=5)
+myLabel1 = ctk.CTkLabel(root, 
+                        text="Enter a VIN to search NHTSA.gov",
+                        font=ctk.CTkFont(family="arial", size=17)
+                        )
+myLabel1.grid(row=0, column=0, columnspan=2, padx=25, pady=5)
 
-myButton = Button(root, text='Search', padx=25, bg="light gray", command=myClick)
-myButton.grid(row=1, column= 2, padx=5, pady=5)
+myButton = ctk.CTkButton(root, 
+                         text='Search',
+                         fg_color="black", 
+                         command=myClick)
+myButton.grid(row=2, column= 1, padx=5, pady=5)
 
-clearbutton = Button(root, text='Clear', padx=30, bg="light gray", command=clear)
-clearbutton.grid(row=2, padx=20, column=2)
+clearbutton = ctk.CTkButton(root, 
+                        text='Clear', 
+                        fg_color="black", 
+                        command=clear)
+clearbutton.grid(row=2, padx=20, column=0)
 
 root.mainloop()
